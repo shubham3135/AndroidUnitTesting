@@ -10,22 +10,23 @@ import org.junit.Test
 class ResourceComparerTest {
 
     private lateinit var resourceComparer: ResourceComparer
+    private lateinit var context: Context
+
 
     @Before
     fun setup() {
         resourceComparer = ResourceComparer()
+        context = ApplicationProvider.getApplicationContext<Context>()
     }
 
     @Test
     fun stringResourceSameAsGivenString_returnsTrue() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
         val result = resourceComparer.isEqual(context, R.string.app_name, "UnitTestingYT")
         assertThat(result).isTrue()
     }
 
     @Test
     fun stringResourceDifferentAsGivenString_returnsFalse() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
         val result = resourceComparer.isEqual(context, R.string.app_name, "Hello")
         assertThat(result).isFalse()
     }
